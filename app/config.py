@@ -34,7 +34,7 @@ class Config():
     KERKO_WHOOSH_LANGUAGE = 'en'
     KERKO_ZOTERO_LOCALE = 'en-GB'
 
-    HOME_URL = 'https://docs.opendeved.net'
+    HOME_URL = 'https://opendeved.net'
     HOME_TITLE = _("Open Development & Education")
     # HOME_SUBTITLE = _("...")
     NAV_TITLE = _("Evidence Library")
