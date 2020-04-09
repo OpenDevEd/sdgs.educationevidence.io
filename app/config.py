@@ -55,7 +55,16 @@ class Config():
         default_child_blacklist_re='',
     )
 
-    # References facet.
+    KERKO_COMPOSER.add_facet(
+        CollectionFacetSpec(
+            key='facet_featured',
+            filter_key='featured',
+            title=_('Featured publisher'),
+            weight=5,
+            collection_key='JUDM2WBF',
+        )
+    )
+
     KERKO_COMPOSER.add_facet(
         CollectionFacetSpec(
             key='facet_references',
@@ -63,6 +72,16 @@ class Config():
             title=_('References'),
             weight=10,
             collection_key='Y37ULQ86',
+        )
+    )
+
+    KERKO_COMPOSER.add_facet(
+        CollectionFacetSpec(
+            key='facet_theme',
+            filter_key='theme',
+            title=_('Theme'),
+            weight=15,
+            collection_key='QK8NXPKZ',
         )
     )
 
