@@ -104,7 +104,7 @@ class ProductionConfig(Config):
     LOGGING_ADDRESS = '/dev/log'
     LOGGING_LEVEL = logging.WARNING
     LOGGING_FORMAT = '%(name)s %(asctime)s %(levelname)s: %(message)s'
-    GOOGLE_ANALYTICS_ID = 'UA-149862882-2'
+    GOOGLE_ANALYTICS_ID = 'UA-2308921-3'
     LIBSASS_STYLE = 'compressed'
 
 
