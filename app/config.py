@@ -102,7 +102,7 @@ class ProductionConfig(Config):
     ASSETS_DEBUG = env.bool('ASSETS_DEBUG', False)
     ASSETS_AUTO_BUILD = False
     LOGGING_LEVEL = env.str('LOGGING_LEVEL', 'WARNING')
-    GOOGLE_ANALYTICS_ID = 'UA-2308921-3'
+    GOOGLE_ANALYTICS_ID = 'UA-169419325-2'
     LIBSASS_STYLE = 'compressed'
 
 
