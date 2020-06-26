@@ -51,7 +51,7 @@ class Config():
 
     KERKO_COMPOSER = Composer(
         whoosh_language=KERKO_WHOOSH_LANGUAGE,
-        exclude_default_facets=['facet_tag', 'facet_link'],
+        exclude_default_facets=['facet_tag', 'facet_link', 'facet_item_type'],
         default_child_whitelist_re='^publishPDF$',
         default_child_blacklist_re='',
     )
@@ -61,18 +61,8 @@ class Config():
             key='facet_featured',
             filter_key='featured',
             title=_('Featured publisher'),
-            weight=5,
-            collection_key='JUDM2WBF',
-        )
-    )
-
-    KERKO_COMPOSER.add_facet(
-        CollectionFacetSpec(
-            key='facet_references',
-            filter_key='ref',
-            title=_('References'),
             weight=10,
-            collection_key='Y37ULQ86',
+            collection_key='JUDM2WBF',
         )
     )
 
@@ -81,8 +71,38 @@ class Config():
             key='facet_theme',
             filter_key='theme',
             title=_('Theme'),
-            weight=15,
+            weight=20,
             collection_key='QK8NXPKZ',
+        )
+    )
+
+    KERKO_COMPOSER.add_facet(
+        CollectionFacetSpec(
+            key='facet_audience',
+            filter_key='audience',
+            title=_('Audience'),
+            weight=30,
+            collection_key='A2V4QW55',
+        )
+    )
+
+    KERKO_COMPOSER.add_facet(
+        CollectionFacetSpec(
+            key='facet_location',
+            filter_key='location',
+            title=_('Location'),
+            weight=40,
+            collection_key='94GNF2EB',
+        )
+    )
+
+    KERKO_COMPOSER.add_facet(
+        CollectionFacetSpec(
+            key='facet_pubtype',
+            filter_key='pubtype',
+            title=_('Publication type'),
+            weight=50,
+            collection_key='NEH6ARC4',
         )
     )
 
