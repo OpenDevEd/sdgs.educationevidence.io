@@ -40,6 +40,10 @@ the changes are tested in that environment, they can be pushed to the Git
 repository and deployed on the production server (see the **Deploying
 OpenDevEdDocs in production** section).
 
+[github.com:edtechhub/eth-evidence-library-kerko](https://github.com/edtechhub/eth-evidence-library-kerko)
+is the upstream repository. Changes common to the two sites must be done there
+first, then merged downstream.
+
 ### Installing the application locally
 
 Pre-requisites:
