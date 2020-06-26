@@ -1,4 +1,3 @@
-import logging
 import pathlib
 
 from environs import Env
@@ -37,6 +36,12 @@ class Config():
     HOME_URL = 'https://opendeved.net'
     HOME_TITLE = _("Open Development & Education")
     # HOME_SUBTITLE = _("...")
+
+    ABOUT_URL = 'https://opendeved.net/about/'
+    BLOG_URL = 'https://opendeved.net/'
+    JOBS_URL = 'https://opendeved.net/jobs/'
+    PROGRAMMES_URL = 'https://opendeved.net/programmes/'
+
     NAV_TITLE = _("Evidence Library")
     KERKO_TITLE = _("Evidence Library – Open Development & Education")
     KERKO_CSL_STYLE = 'apa'
@@ -95,6 +100,7 @@ class DevelopmentConfig(Config):
     KERKO_ZOTERO_END = env.int('KERKO_ZOTERO_END', 0)
     LIBSASS_STYLE = 'expanded'
     LOGGING_LEVEL = env.str('LOGGING_LEVEL', 'DEBUG')
+
 
 class ProductionConfig(Config):
     CONFIG = 'production'

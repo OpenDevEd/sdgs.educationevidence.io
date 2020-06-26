@@ -15,6 +15,21 @@ $theme-colors:
 
 $primary: $salmon;
 
+$grid-breakpoints: (
+  // Remove Bootstrap's xs.
+  sm: 0,
+  md: 768px,
+  lg: 960px,
+  xl: 1200px
+);
+
+$container-max-widths: (
+  // Remove Bootstrap's sm, md & lg.
+  xl: 1184px
+);
+
+// $grid-gutter-width: 4rem;
+
 $border-color: #efefef;
 $border-radius: 0;
 
@@ -31,11 +46,13 @@ $h4-font-size: $font-size-base * 1.25;
 $h5-font-size: $font-size-base * 1.1;
 $h6-font-size: $font-size-base;
 
+$nav-link-padding-x: 1.3rem;
 $nav-link-font-family: $font-family-oswald;  // Custom variable.
 $nav-link-font-size: $font-size-base * 1.125;  // Custom variable.
 $nav-link-font-weight: 400;  // Custom variable.
-$navbar-padding-y: 1rem;
-$navbar-brand-padding-y: .2em;
+$navbar-padding-x: 2rem;
+$navbar-padding-y: 1.125rem;
+$navbar-brand-padding-y: 0;
 $navbar-brand-font-size: 1.875rem;
 $navbar-toggler-padding-y: .5rem;
 $navbar-light-color: $black;
@@ -47,6 +64,7 @@ $card-border-color: $border-color;
 $input-border-color: $border-color;
 $dropdown-border-color: $border-color;
 $pagination-border-color: $border-color;
+$pagination-disabled-border-color: $border-color;
 
 $dropdown-link-hover-bg: #dee2e6;  // $gray-300
 
@@ -167,13 +185,30 @@ main {
 // Navbar.
 
 .navbar {
+  padding-left: 0;
+  padding-right: 0;
   border-bottom: $border-width solid $border-color;
+  text-align: center;
+  @include media-breakpoint-up(lg) {
+  }
 }
 .navbar-brand {
+  width: 100%;
+  padding-bottom: $navbar-padding-y;
+  border-bottom: $border-width solid $border-color;
+  margin-right: 0;
   white-space: normal;
+  @include media-breakpoint-up(lg) {
+    width: auto;
+    padding-bottom: 0;
+    border-bottom: 0;
+    margin-right: $navbar-padding-x;
+    text-align: left;
+  }
 }
 .navbar-toggler {
   display: block;
+  margin-top: $navbar-padding-y;
   font-family: $nav-link-font-family;
   font-size: $nav-link-font-size;
   font-weight: $nav-link-font-weight;
@@ -184,28 +219,54 @@ main {
   font-size: $font-size-base * .75;
   vertical-align: top;
 }
+.navbar-nav {
+  padding-top: $navbar-padding-y;
+  padding-bottom: $navbar-padding-y;
+  margin-top: $navbar-padding-y;
+  margin-left: 0;
+  margin-right: 0;
+  background: #fbfbfb;
+  @include media-breakpoint-up(lg) {
+    padding: 0;
+    margin-top: 0;
+    margin-left: auto !important;
+    margin-right: -$nav-link-padding-x;
+    background: transparent;
+  }
+}
 .nav-item {
-  padding-top: $nav-link-padding-y;
-  padding-bottom: $nav-link-padding-y;
+  padding: 0 $navbar-padding-x;
   font-family: $nav-link-font-family;
   font-size: $nav-link-font-size;
   font-weight: $nav-link-font-weight;
   text-transform: uppercase;
-  letter-spacing: .05em;
+  letter-spacing: .8px;
+  @include media-breakpoint-up(lg) {
+    padding: $nav-link-padding-y 0;
+    margin-left: $nav-link-padding-x;
+    margin-right: $nav-link-padding-x;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }
 .nav-link {
-  padding: 0 !important;
+  padding: 10px 0 !important;
   border-bottom: 3px solid transparent;
-  margin-top: $nav-link-padding-y;
+  margin-top: 3px;
+  text-align: left;
+  white-space: nowrap;
   @include media-breakpoint-up(lg) {
+    padding: 0 !important;
     margin-top: 0;
     display: inline-block;
   }
-  @include hover {
+  .nav-item.active & {
     border-bottom-color: $primary;
-    .nav-item.active & {
-      color: $navbar-light-hover-color;
-    }
+  }
+  @include hover-focus {
+    color: $navbar-light-hover-color !important;
+    border-bottom-color: $primary;
   }
 }
 .brand-title {
@@ -215,7 +276,7 @@ main {
     font-size: $navbar-brand-font-size;
   }
   font-weight: $headings-font-weight;
-  line-height: 1.5;
+  line-height: 1.25;
   text-transform: uppercase;
   letter-spacing: .08em;
   color: $black;
@@ -229,12 +290,6 @@ main {
   font-size: $font-size-base;
   color: $primary;
   letter-spacing: .05em;
-}
-
-// Buttons.
-
-.btn-primary {
-  color: $white;
 }
 
 // Badge.
