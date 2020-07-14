@@ -1,10 +1,15 @@
 import pathlib
+import re
 
 from environs import Env
 from flask_babelex import gettext as _
+from whoosh.fields import STORED
 
+from kerko import codecs, extractors, transformers
 from kerko.composer import Composer
-from kerko.specs import CollectionFacetSpec
+from kerko.specs import CollectionFacetSpec, FieldSpec
+
+from .transformers import extra_field_cleaner
 
 env = Env()  # pylint: disable=invalid-name
 env.read_env()
@@ -57,8 +62,37 @@ class Config():
     KERKO_COMPOSER = Composer(
         whoosh_language=KERKO_WHOOSH_LANGUAGE,
         exclude_default_facets=['facet_tag', 'facet_link', 'facet_item_type'],
-        default_child_whitelist_re='^(_publish|publishPDF)$',
-        default_child_blacklist_re='',
+        exclude_default_fields=['data'],
+        default_child_include_re='^(_publish|publishPDF)$',
+        default_child_exclude_re='',
+    )
+
+    # Replace the default 'data' extractor to strip unwanted data from the Extra field.
+    KERKO_COMPOSER.add_field(
+        FieldSpec(
+            key='data',
+            field_type=STORED,
+            extractor=extractors.TransformerExtractor(
+                extractor=extractors.RawDataExtractor(),
+                transformers=[extra_field_cleaner]
+            ),
+            codec=codecs.JSONFieldCodec()
+        )
+    )
+
+    # Add extractors for the 'alternateId' field.
+    KERKO_COMPOSER.fields['alternateId'].extractor.extractors.append(
+        extractors.TransformerExtractor(
+            extractor=extractors.ItemDataExtractor(key='extra'),
+            transformers=[
+                transformers.find(
+                    regex=r'^\s*EdTechHub.ItemAlsoKnownAs\s*:\s*(.*)$',
+                    flags=re.IGNORECASE | re.MULTILINE,
+                    max_matches=1,
+                ),
+                transformers.split(sep=';'),
+            ]
+        )
     )
 
     KERKO_COMPOSER.add_facet(
