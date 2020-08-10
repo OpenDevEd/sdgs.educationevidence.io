@@ -146,15 +146,16 @@ class Config():
         )
     )
 
-    KERKO_COMPOSER.add_facet(
-        CollectionFacetSpec(
-            key='facet_references',
-            filter_key='ref',
-            title=_('Other'),
-            weight=60,
-            collection_key='Y37ULQ86',
-        )
-    )
+    # TODO: Remove this code when certain the facet is no longer wanted.
+    # KERKO_COMPOSER.add_facet(
+    #     CollectionFacetSpec(
+    #         key='facet_references',
+    #         filter_key='ref',
+    #         title=_('Other'),
+    #         weight=60,
+    #         collection_key='Y37ULQ86',
+    #     )
+    # )
 
 
 class DevelopmentConfig(Config):
