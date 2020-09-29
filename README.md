@@ -33,12 +33,11 @@ Some things to know:
   push the resulting files from `static/dist/` to the code repository, so that
   the built assets can be used on the production server.
 
-## Developing OpenDevEdDocs
+## Developing the application
 
-Making changes to OpenDevEdDocs requires a Python development environment. Once
-the changes are tested in that environment, they can be pushed to the Git
-repository and deployed on the production server (see the **Deploying
-OpenDevEdDocs in production** section).
+Making changes to this application requires a Python development environment.
+Once the changes are tested in that environment, they can be pushed to the Git
+repository and deployed on the production server.
 
 [github.com:edtechhub/eth-evidence-library-kerko](https://github.com/edtechhub/eth-evidence-library-kerko)
 is the upstream repository. Changes common to the two sites must be done there
@@ -66,7 +65,7 @@ Steps:
    npm install
    ```
 
-   This will install many packages required by Kerko and OpenDevEdDocs.
+   This will install many packages required by Kerko and this application.
 
 2. Copy `dotenv.sample` to `.env`. Open `.env` in a text editor to assign proper
    values to the variables outlined below.
@@ -106,7 +105,7 @@ Steps:
    flask kerko SUBCOMMAND --help
    ```
 
-4. Run OpenDevEdDocs using Flask's built-in server:
+4. Run the application using Flask's built-in server:
 
    ```bash
    flask run
@@ -171,13 +170,13 @@ to the repository.
 
 Kerko can be upgraded like regular Python packages (see **Upgrading Python
 dependencies**). However, make sure to check [Kerko's changelog][Kerko_changelog].
-The upgrade may require some changes to OpenDevEdDocs, or a rebuild of the search
-index.
+The upgrade may require some changes to the application, or a rebuild of the
+search index.
 
 Similarly, some change to Kerko's configuration, especially changes to the
-`KERKO_COMPOSER` variable in OpenDevEdDocs's `app/config.py`, may have an impact
-on the structure of the search index. A rebuild of the search index may be
-necessary after such change.
+`KERKO_COMPOSER` variable in the application's `app/config.py`, may have an
+impact on the structure of the search index. A rebuild of the search index may
+be necessary after such change.
 
 With your virtual environment active, to rebuild the search index:
 
@@ -211,7 +210,7 @@ for later deployment.
 Note: Never manually edit the files in `static/dist/css/` or `static/dist/js/`;
 any change will be overwritten by the build process.
 
-## Deploying OpenDevEdDocs
+## Deploying the application
 
 There are two types of deployment: the initial installation or the deployment of
 changes to an existing installation.
@@ -274,7 +273,7 @@ The following procedure has to be performed only once.
 
 ### Deploying changes to the existing installation on Gandi
 
-The following procedure is necessary to deploy changes to OpenDevEdDocs into
+The following procedure is necessary to deploy changes to the application into
 production.
 
 1. Once all required changes have been implemented, built, and tested in the
