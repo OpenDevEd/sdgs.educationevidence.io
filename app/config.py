@@ -95,6 +95,31 @@ class Config():
             ]
         )
     )
+    KERKO_COMPOSER.fields['alternateId'].extractor.extractors.append(
+        extractors.TransformerExtractor(
+            extractor=extractors.ItemDataExtractor(key='extra'),
+            transformers=[
+                transformers.find(
+                    regex=r'^\s*KerkoCite.ItemAlsoKnownAs\s*:\s*(.*)$',
+                    flags=re.IGNORECASE | re.MULTILINE,
+                    max_matches=1,
+                ),
+                transformers.split(sep=' '),
+            ]
+        )
+    )
+    KERKO_COMPOSER.fields['alternateId'].extractor.extractors.append(
+        extractors.TransformerExtractor(
+            extractor=extractors.ItemDataExtractor(key='extra'),
+            transformers=[
+                transformers.find(
+                    regex=r'^\s*shortDOI\s*:\s*(\S+)\s*$',
+                    flags=re.IGNORECASE | re.MULTILINE,
+                    max_matches=0,
+                ),
+            ]
+        )
+    )
 
     KERKO_COMPOSER.add_facet(
         CollectionFacetSpec(
@@ -126,17 +151,6 @@ class Config():
         )
     )
 
-    # TODO: Audience facet.
-    # KERKO_COMPOSER.add_facet(
-    #     CollectionFacetSpec(
-    #         key='facet_audience',
-    #         filter_key='audience',
-    #         title=_('Audience'),
-    #         weight=40,
-    #         collection_key='A2V4QW55',
-    #     )
-    # )
-
     KERKO_COMPOSER.add_facet(
         CollectionFacetSpec(
             key='facet_location',
@@ -146,17 +160,6 @@ class Config():
             collection_key='94GNF2EB',
         )
     )
-
-    # TODO: Remove this code when certain the facet is no longer wanted.
-    # KERKO_COMPOSER.add_facet(
-    #     CollectionFacetSpec(
-    #         key='facet_references',
-    #         filter_key='ref',
-    #         title=_('Other'),
-    #         weight=60,
-    #         collection_key='Y37ULQ86',
-    #     )
-    # )
 
 
 class DevelopmentConfig(Config):
