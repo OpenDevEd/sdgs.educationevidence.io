@@ -2,12 +2,11 @@ import pathlib
 import re
 
 from environs import Env
-from flask_babelex import gettext as _
-from whoosh.fields import STORED
-
+from flask_babel import gettext as _
 from kerko import codecs, extractors, transformers
 from kerko.composer import Composer
 from kerko.specs import CollectionFacetSpec, FieldSpec
+from whoosh.fields import STORED
 
 from .transformers import extra_field_cleaner
 
@@ -34,7 +33,7 @@ class Config():
         str(pathlib.Path(__file__).parent.parent / 'static' / 'src' / 'vendor' / '@fortawesome' / 'fontawesome-free' / 'scss'),
     ]
 
-    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_DEFAULT_LOCALE = 'en_GB'
     KERKO_WHOOSH_LANGUAGE = 'en'
     KERKO_ZOTERO_LOCALE = 'en-GB'
 
@@ -49,9 +48,13 @@ class Config():
 
     NAV_TITLE = _("Evidence Library")
     KERKO_TITLE = _("Evidence Library – Open Development & Education")
-    KERKO_CSL_STYLE = 'apa'
+
     KERKO_PRINT_ITEM_LINK = True
     KERKO_PRINT_CITATIONS_LINK = True
+    KERKO_RESULTS_FIELDS = ['id', 'attachments', 'bib', 'coins', 'data', 'preview', 'url']
+    KERKO_RESULTS_ABSTRACTS = True
+    KERKO_RESULTS_ABSTRACTS_MAX_LENGTH = 500
+    KERKO_RESULTS_ABSTRACTS_MAX_LENGTH_LEEWAY = 40
     KERKO_TEMPLATE_BASE = 'app/base.html.jinja2'
     KERKO_TEMPLATE_LAYOUT = 'app/layout.html.jinja2'
     KERKO_TEMPLATE_SEARCH = 'app/search.html.jinja2'
@@ -59,6 +62,11 @@ class Config():
     KERKO_TEMPLATE_ITEM = 'app/item.html.jinja2'
     KERKO_DOWNLOAD_ATTACHMENT_NEW_WINDOW = True
     KERKO_RELATIONS_INITIAL_LIMIT = 50
+
+    # CAUTION: The URL's query string must be changed after any edit to the CSL
+    # style, otherwise zotero.org might still use a previously cached version of
+    # the file.
+    KERKO_CSL_STYLE = 'https://docs.edtechhub.org/static/dist/csl/eth_apa.xml?202012301815'
 
     KERKO_COMPOSER = Composer(
         whoosh_language=KERKO_WHOOSH_LANGUAGE,
@@ -78,6 +86,28 @@ class Config():
                 transformers=[extra_field_cleaner]
             ),
             codec=codecs.JSONFieldCodec()
+        )
+    )
+
+    # Add field for storing the formatted item preview used on search result
+    # pages. This relies on the CSL style's in-text citation formatting and only
+    # makes sense using our custom CSL style!
+    KERKO_COMPOSER.add_field(
+        FieldSpec(
+            key='preview',
+            field_type=STORED,
+            extractor=extractors.TransformerExtractor(
+                extractor=extractors.ItemExtractor(key='citation', format_='citation'),
+                # Zotero wraps the citation in a <span> element (most probably
+                # because it expects the 'citation' format to be used in-text),
+                # but that <span> has to be removed because our custom CSL style
+                # causes <div>s to be nested within. Let's replace that <span>
+                # with the same markup that the 'bib' format usually provides.
+                transformers=[
+                    lambda value: re.sub(r'^<span>', '<div class="csl-entry">', value, count=1),
+                    lambda value: re.sub(r'</span>$', '</div>', value, count=1),
+                ]
+            )
         )
     )
 

@@ -147,9 +147,6 @@ h3,
 .pre-line {
   white-space: pre-line;
 }
-.w-40 {
-  min-width: 40% !important;
-}
 .more-or-less[aria-expanded="true"] span.more {
   display: none;
 }
@@ -345,16 +342,35 @@ main {
   margin-bottom: 1em;
   a {
     color: $black;
+    .csl-block:first-of-type {
+      font-size: $h4-font-size;
+      font-weight: bold;
+      color: $salmon;
+    }
     @include hover {
       color: $black;
+      text-decoration: none;
+      .csl-block:first-of-type {
+        color: $black;
+      }
+    }
+  }
+  .btn-link {
+    transition: none;
+    @include hover {
+      color: $black !important;
+      span {
+        color: $black !important;
+        text-decoration: underline;
+      }
     }
   }
 }
 .search-abstract {
-  padding-left: 1rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  font-size: .85em;
+  font-size: .875em;  // Match .btn-sm font-size.
+  .search-print-preview & {
+    margin-left: 1em;  // Match APA style indent.
+  }
 }
 
 // Print media styles.
