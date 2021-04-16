@@ -39,7 +39,7 @@ Making changes to this application requires a Python development environment.
 Once the changes are tested in that environment, they can be pushed to the Git
 repository and deployed on the production server.
 
-[github.com:edtechhub/eth-evidence-library-kerko](https://github.com/edtechhub/eth-evidence-library-kerko)
+[github.com:edtechhub/kerko-docs.edtechhub.org.git](https://github.com/edtechhub/kerko-docs.edtechhub.org)
 is the upstream repository. Changes common to the two sites must be done there
 first, then merged downstream.
 
