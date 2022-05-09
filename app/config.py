@@ -47,6 +47,7 @@ class Config():
         self.BLOG_URL = 'https://opendeved.net/'
         self.JOBS_URL = 'https://opendeved.net/jobs/'
         self.PROGRAMMES_URL = 'https://opendeved.net/programmes/'
+        self.CONTACTUS_URL = 'https://opendeved.net/contact-us/'
 
         self.NAV_TITLE = _("Evidence Library")
         self.KERKO_TITLE = _("Evidence Library – Open Development & Education")
