@@ -71,7 +71,7 @@ class Config():
         # CAUTION: The URL's query string must be changed after any edit to the CSL
         # style, otherwise zotero.org might still use a previously cached version of
         # the file.
-        self.KERKO_CSL_STYLE = 'https://docs.edtechhub.org/static/dist/csl/eth_apa.xml?202012301815'
+        self.KERKO_CSL_STYLE = 'https://docs.opendeved.net/static/dist/csl/eth_apa.xml?202012301815'
 
         self.KERKO_COMPOSER = Composer(
             whoosh_language=self.KERKO_WHOOSH_LANGUAGE,
