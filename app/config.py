@@ -3,12 +3,16 @@ import re
 
 from environs import Env
 from flask_babel import gettext as _
-from kerko import codecs, extractors, transformers
+from kerko import extractors, transformers
 from kerko.composer import Composer
-from kerko.specs import CollectionFacetSpec, FieldSpec
-from whoosh.fields import STORED
+from kerko.renderers import TemplateRenderer
+from kerko.specs import BadgeSpec, CollectionFacetSpec, FieldSpec, SortSpec
+from whoosh.fields import BOOLEAN, STORED
 
+from .extractors import MatchesTagExtractor
 from .transformers import extra_field_cleaner
+
+# pylint: disable=invalid-name
 
 env = Env()
 env.read_env()
@@ -51,7 +55,6 @@ class Config():
 
         self.NAV_TITLE = _("Evidence Library")
         self.KERKO_TITLE = _("Evidence Library – Open Development & Education")
-
         self.KERKO_PRINT_ITEM_LINK = True
         self.KERKO_PRINT_CITATIONS_LINK = True
         self.KERKO_RESULTS_FIELDS = ['id', 'attachments', 'bib', 'coins', 'data', 'preview', 'url']
@@ -74,8 +77,9 @@ class Config():
             whoosh_language=self.KERKO_WHOOSH_LANGUAGE,
             exclude_default_facets=['facet_tag', 'facet_link', 'facet_item_type'],
             exclude_default_fields=['data'],
-            default_child_include_re='^(_publish|publishPDF)$',
-            default_child_exclude_re='',
+            default_item_exclude_re=r'^_exclude$',
+            default_child_include_re=r'^(_publish|publishPDF)$',
+            default_child_exclude_re=r'',
         )
 
         # Replace the default 'data' extractor to strip unwanted data from the Extra field.
@@ -87,7 +91,6 @@ class Config():
                     extractor=extractors.RawDataExtractor(),
                     transformers=[extra_field_cleaner]
                 ),
-                codec=codecs.JSONFieldCodec()
             )
         )
 
@@ -193,6 +196,85 @@ class Config():
             )
         )
 
+        # OpenDevEd flag and badge.
+        self.KERKO_COMPOSER.add_field(
+            FieldSpec(
+                key='opendeved',
+                field_type=BOOLEAN(stored=True),
+                extractor=extractors.InCollectionExtractor(collection_key='JG6T4YVA'),
+            )
+        )
+        self.KERKO_COMPOSER.add_badge(
+            BadgeSpec(
+                key='opendeved',
+                field=self.KERKO_COMPOSER.fields['opendeved'],
+                activator=lambda field, item: bool(item.get(field.key)),
+                renderer=TemplateRenderer(
+                    'app/_ode-badge.html.jinja2', badge_title=_('Published by Open Development & Education')
+                ),
+                weight=100,
+            )
+        )
+        # "Internal document" flag and badge.
+        self.KERKO_COMPOSER.add_field(
+            FieldSpec(
+                key='internal',
+                field_type=BOOLEAN(stored=True),
+                extractor=MatchesTagExtractor(pattern=r'^_internal$'),
+            )
+        )
+        self.KERKO_COMPOSER.add_badge(
+            BadgeSpec(
+                key='internal',
+                field=self.KERKO_COMPOSER.fields['internal'],
+                activator=lambda field, item: item.get(field.key, False),
+                renderer=TemplateRenderer(
+                    'app/_text-badge.html.jinja2', text=_('Internal<br />document')
+                ),
+                weight=10,
+            )
+        )
+        # "Coming soon" flag and badge.
+        self.KERKO_COMPOSER.add_field(
+            FieldSpec(
+                key='comingsoon',
+                field_type=BOOLEAN(stored=True),
+                extractor=MatchesTagExtractor(pattern=r'^_comingsoon$'),
+            )
+        )
+        self.KERKO_COMPOSER.add_badge(
+            BadgeSpec(
+                key='comingsoon',
+                field=self.KERKO_COMPOSER.fields['comingsoon'],
+                activator=lambda field, item: item.get(field.key, False),
+                renderer=TemplateRenderer(
+                    'app/_text-badge.html.jinja2', text=_('Coming<br >soon')
+                ),
+                weight=20,
+            )
+        )
+
+        # Sort option based on the OpenDevEd flag.
+        self.KERKO_COMPOSER.add_sort(
+            SortSpec(
+                key='ode_desc',
+                label=_('Open Development & Education first'),
+                weight=100,
+                fields=[
+                    self.KERKO_COMPOSER.fields['opendeved'],
+                    self.KERKO_COMPOSER.fields['sort_date'],
+                    self.KERKO_COMPOSER.fields['sort_creator'],
+                    self.KERKO_COMPOSER.fields['sort_title']
+                ],
+                reverse=[
+                    False,
+                    True,
+                    False,
+                    False,
+                ],
+            )
+        )
+
 
 class DevelopmentConfig(Config):
 
@@ -202,8 +284,6 @@ class DevelopmentConfig(Config):
         self.CONFIG = 'development'
         self.DEBUG = True
         self.ASSETS_DEBUG = env.bool('ASSETS_DEBUG', True)  # Don't bundle/minify static assets.
-        self.KERKO_ZOTERO_START = env.int('KERKO_ZOTERO_START', 0)
-        self.KERKO_ZOTERO_END = env.int('KERKO_ZOTERO_END', 0)
         self.LIBSASS_STYLE = 'expanded'
         self.LOGGING_LEVEL = env.str('LOGGING_LEVEL', 'DEBUG')
 

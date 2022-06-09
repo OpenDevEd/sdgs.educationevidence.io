@@ -372,6 +372,21 @@ main {
     margin-left: 1em;  // Match APA style indent.
   }
 }
+.ode-badge {
+  width: auto;
+  height: 2.5rem;
+  margin-top: -.25em;
+  margin-left: 1rem;
+}
+.text-badge {
+  color: #212529;
+  border: 1px solid #212529;
+  font-size: .75rem;
+  margin-left: 1rem;
+}
+.text-badge-item {
+  font-size: 1rem;
+}
 
 // Print media styles.
 
