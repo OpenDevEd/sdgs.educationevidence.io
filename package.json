@@ -1,7 +1,7 @@
 {
-  "name": "edtechhublib",
+  "name": "opendevedlib",
   "version": "1.0.0",
-  "description": "EdTech Hub Evidence Library",
+  "description": "Open Development & Education Evidence Library",
   "main": "",
   "scripts": {
     "postinstall": "node ./node_modules/frontend-dependencies/index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:edtechhub/eth-evidence-library-kerko.git"
+    "url": "https://github.com/OpenDevEd/kerko-docs.opendeved.net.git"
   },
   "//": "Browserslist taken from static/src/vendor/bootstrap/.browserslistrc",
   "browserslist": [
@@ -24,7 +24,7 @@
     "Android >= 4.4",
     "Opera >= 30"
   ],
-  "author": "EdTech Hub",
+  "author": "Open Development & Education",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "autoprefixer": "^9.7.0",
