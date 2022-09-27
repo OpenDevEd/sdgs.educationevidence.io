@@ -48,7 +48,8 @@ class Config():
         # self.HOME_SUBTITLE = _("...")
 
         self.ABOUT_URL = 'https://opendeved.net/about/'
-        self.BLOG_URL = 'https://opendeved.net/'
+        self.PARTNERS_URL = 'https://opendeved.net/partners/'
+        self.BLOG_URL = 'https://opendeved.net/blog/'
         self.JOBS_URL = 'https://opendeved.net/jobs/'
         self.PROGRAMMES_URL = 'https://opendeved.net/programmes/'
         self.CONTACTUS_URL = 'https://opendeved.net/contact-us/'
