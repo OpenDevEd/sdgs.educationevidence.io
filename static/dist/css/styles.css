@@ -14133,8 +14133,8 @@ main {
 @media (min-width: 960px) {
   .navbar .nav-item {
     padding: 0.5rem 0;
-    margin-left: 1.3rem;
-    margin-right: 1.3rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
   }
   .navbar .nav-item:first-child {
     margin-left: 0;
@@ -14230,7 +14230,7 @@ main {
 
 @media (min-width: 960px) {
   .brand-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 }
 
