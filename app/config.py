@@ -84,7 +84,7 @@ class Config():
             default_item_exclude_re=r'^_exclude$',
             default_child_include_re=r'^(_publish|publishPDF)$',
             default_child_exclude_re=r'',
-            facet_initial_limit=5,
+            facet_initial_limit=10,
             facet_initial_limit_leeway=2,
         )
 
@@ -169,8 +169,8 @@ class Config():
                 title=_('Featured publisher'),
                 weight=10,
                 collection_key='JUDM2WBF',
-                initial_limit=5,
-                initial_limit_leeway=2,
+                initial_limit=15,
+                initial_limit_leeway=5,
             )
         )
 
@@ -193,7 +193,7 @@ class Config():
                 title=_('Theme'),
                 weight=30,
                 collection_key='QK8NXPKZ',
-                initial_limit=5,
+                initial_limit=10,
                 initial_limit_leeway=2,
             )
         )
