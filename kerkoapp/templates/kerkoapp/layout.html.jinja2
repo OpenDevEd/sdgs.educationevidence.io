@@ -1,7 +1,7 @@
 {% extends 'kerko/layout.html.jinja2' %}
 
 {% block meta_title_inner -%}
-    {%- if title %}{{ title|striptags|escape }} – {% endif %}{{ config.KERKO_TITLE|striptags|escape -}}
+    {%- if title %}{{ title|striptags|escape }} – {% endif %}{{ config.kerko.meta.title|striptags|escape -}}
 {% endblock %}
 
 {%- block metas %}
@@ -40,25 +40,25 @@
                     <ul class="navbar-nav justify-content-end">
                         {%- block navbar_items %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ config.ABOUT_URL }}">{{ _('About') }}</a>
+                                <a class="nav-link" href="https://opendeved.net/about/">{{ _('About') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ config.PROGRAMMES_URL }}">{{ _('Programmes') }}</a>
+                                <a class="nav-link" href="https://opendeved.net/programmes/">{{ _('Programmes') }}</a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ url_for('kerko.search') }}" aria-current="true">{{ config.NAV_TITLE }}</a>
+                                <a class="nav-link" href="{{ url_for('kerko.search') }}" aria-current="true">{{ _("Evidence Library") }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ config.PARTNERS_URL }}">{{ _('Partners') }}</a>
+                                <a class="nav-link" href="https://opendeved.net/partners/">{{ _('Partners') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ config.BLOG_URL }}">{{ _('Blog') }}</a>
+                                <a class="nav-link" href="https://opendeved.net/blog/">{{ _('Blog') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ config.JOBS_URL }}">{{ _('Jobs') }}</a>
+                                <a class="nav-link" href="https://opendeved.net/jobs/">{{ _('Jobs') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ config.CONTACTUS_URL }}">{{ _('Contact Us') }}</a>
+                                <a class="nav-link" href="https://opendeved.net/contact-us/">{{ _('Contact Us') }}</a>
                             </li>
                         {%- endblock navbar_items %}
                     </ul>
