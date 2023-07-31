@@ -36,7 +36,6 @@ relations_initial_limit = 50
 
 result_fields = ["id", "attachments", "bib", "data", "preview", "url"]
 whoosh_language = "en"
-whoosh_limitmb = 64
 
 [kerko.templates]
 
@@ -109,6 +108,10 @@ child_exclude_re = ""
     weight = 50
     initial_limit = 5
     initial_limit_leeway = 2
+
+[kerko.performance]
+
+whoosh_index_memory_limit = 64
 
 [kerkoapp.proxy_fix]
 
