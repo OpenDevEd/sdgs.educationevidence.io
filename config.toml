@@ -10,15 +10,15 @@ google_analytics_id = "UA-169419325-2"
 
 [kerko.link_groups]
 
-    [[kerko.link_groups.breadcrumb_base]]
-    text = "Open Development & Education"
-    type = "url"
-    url = "https://opendeved.net"
+[[kerko.link_groups.breadcrumb_base]]
+text = "Open Development & Education"
+type = "url"
+url = "https://opendeved.net"
 
-    [[kerko.link_groups.breadcrumb_base]]
-    text = "Evidence Library"
-    type = "endpoint"
-    endpoint = "kerko.search"
+[[kerko.link_groups.breadcrumb_base]]
+text = "Evidence Library"
+type = "endpoint"
+endpoint = "kerko.search"
 
 [kerko.features]
 
@@ -45,6 +45,7 @@ search_item = "kerkoapp/search-item.html.jinja2"
 item = "kerkoapp/item.html.jinja2"
 
 [kerko.zotero]
+batch_size = 20
 
 locale = "en-GB"
 
@@ -60,54 +61,75 @@ child_exclude_re = ""
 
 [kerko.facets]
 
-    [kerko.facets.tag]
-    enabled = false
+[kerko.facets.tag]
+enabled = false
 
-    [kerko.facets.link]
-    enabled = false
+[kerko.facets.link]
+enabled = false
 
-    [kerko.facets.item_type]
-    enabled = false
+[kerko.facets.item_type]
+enabled = false
 
-    [kerko.facets.featured]
-    enabled = true
-    type = "collection"
-    collection_key = "JUDM2WBF"
-    filter_key = "featured"
-    title = "Featured publisher"
-    weight = 10
-    initial_limit = 15
-    initial_limit_leeway = 5
+[kerko.facets.theme]
+enabled = true
+type = "collection"
+collection_key = "ZPUBDQS7"
+filter_key = "theme"
+title = "Theme"
+weight = 10
+initial_limit = 15
+initial_limit_leeway = 5
 
-    [kerko.facets.pubtype]
-    enabled = true
-    type = "collection"
-    collection_key = "NEH6ARC4"
-    filter_key = "pubtype"
-    title = "Publication type"
-    weight = 20
-    initial_limit = 5
-    initial_limit_leeway = 2
+[kerko.facets.sdg]
+enabled = true
+type = "collection"
+collection_key = "DEIWAU4A"
+filter_key = "SDG"
+title = "SDG"
+weight = 20
+initial_limit = 5
+initial_limit_leeway = 2
 
-    [kerko.facets.theme]
-    enabled = true
-    type = "collection"
-    collection_key = "QK8NXPKZ"
-    filter_key = "theme"
-    title = "Theme"
-    weight = 30
-    initial_limit = 10
-    initial_limit_leeway = 2
+[kerko.facets.focus_country]
+enabled = true
+type = "collection"
+collection_key = "Z7NF2DA9"
+filter_key = "focus_country"
+title = "Focus Country"
+weight = 30
+initial_limit = 10
+initial_limit_leeway = 2
 
-    [kerko.facets.location]
-    enabled = true
-    type = "collection"
-    collection_key = "94GNF2EB"
-    filter_key = "location"
-    title = "Location"
-    weight = 50
-    initial_limit = 5
-    initial_limit_leeway = 2
+[kerko.facets.organisation_country]
+enabled = true
+type = "collection"
+collection_key = "7HUABRYP"
+filter_key = "organisation_country"
+title = "Organisation Country"
+weight = 50
+initial_limit = 5
+initial_limit_leeway = 2
+
+[kerko.facets.extra_1]
+enabled = true
+type = "collection"
+collection_key = "K3SENHFY"
+filter_key = "extra_1"
+title = "Extra 1"
+weight = 50
+initial_limit = 5
+initial_limit_leeway = 2
+
+[kerko.facets.extra_2]
+enabled = true
+type = "collection"
+collection_key = "JZ3FZ4U6"
+filter_key = "extra_2"
+title = "Extra 2"
+weight = 50
+initial_limit = 5
+initial_limit_leeway = 2
+
 
 [kerko.performance]
 
