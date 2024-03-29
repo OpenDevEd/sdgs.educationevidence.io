@@ -1,11 +1,12 @@
 BABEL_DEFAULT_LOCALE = "en_GB"
 
-HOME_URL = "https://opendeved.net"
-HOME_TITLE = "Open Development & Education"
+HOME_URL = "https://sdgs.educationevidence.io"
+HOME_TITLE = "SDGS"
 
 [kerko.meta]
 
-title = "Evidence Library – Open Development & Education"
+title = "Evidence Library – SDGS"
+# TODO: Update google_analytics_id to the correct one
 google_analytics_id = "UA-169419325-2"
 
 [kerko.link_groups]
@@ -84,7 +85,7 @@ initial_limit_leeway = 5
 enabled = true
 type = "collection"
 collection_key = "DEIWAU4A"
-filter_key = "SDG"
+filter_key = "sdg"
 title = "SDG"
 weight = 20
 initial_limit = 5
